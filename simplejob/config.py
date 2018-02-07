@@ -14,15 +14,19 @@ class DevelopmentConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = "mysql+mysqldb://root@localhost:3306/simplejob?charset=utf8"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     MAX_CONTENT_LENGTH = 3 * 1024 * 1024
-    PDFS = tuple("pdf")
-    UPLOADED_PDFS_ALLOW = PDFS
     UPLOADED_PDFS_DEST = os.path.join(
             os.path.abspath(os.path.dirname(__file__)),
             "static", "resumes") 
 
 
 class ProductionConfig(BaseConfig):
-    pass
+    # DEBUG = False
+    SQLALCHEMY_DATABASE_URI = "mysql+mysqldb://root:admin1234@mysql:3306/simplejob?charset=utf8"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    MAX_CONTENT_LENGTH = 3 * 1024 * 1024
+    UPLOADED_PDFS_DEST = os.path.join(
+            os.path.abspath(os.path.dirname(__file__)),
+            "static", "resumes") 
 
 
 class TestingConfig(BaseConfig):

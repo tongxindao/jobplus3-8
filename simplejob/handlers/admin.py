@@ -51,12 +51,16 @@ def edit_user(user_id):
     user = User.query.get_or_404(user_id)
     if user.role == user.ROLE_COMPANY:
         form = CompanyProfileForm(obj=user)
+        if form.validate_on_submit():
+            form.update_profile(user)
+            flash("信息更新成功", "success")
+            return redirect(url_for("admin.users"))
     elif user.role == user.ROLE_JOBHUNTER:
         form = UserProfileForm(obj=user)
-    if form.validate_on_submit():
-        form.update_profile(user)
-        flash("信息更新成功", "success")
-        return redirect(url_for("admin.users"))
+        if form.validate_on_submit():
+            form.update_profile(user)
+            flash("信息更新成功", "success")
+            return redirect(url_for("admin.users"))
     return render_template("admin/edit_user.html", form=form, user=user)
 
 

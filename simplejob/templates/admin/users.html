@@ -41,9 +41,12 @@
         <td>{% if user.company_detail.website %}{{ user.company_detail.website }}{% else %}{% endif %}</td>
         <td>
           <div class="btn-group" role="group">
+            {% if not user.role == 30 %}
             <a href="{{ url_for('admin.edit_user', user_id=user.id) }}" type="button" class="btn btn-default">
                 编辑
             </a>
+            {% else %}
+            {% endif %}
             <a href="{{ url_for('admin.disable_user', user_id=user.id) }}" type="button" class="btn btn-default">
                 {% if user.is_enable %}禁用{% else %}启用{% endif %}
             </a>
